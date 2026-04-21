@@ -3,10 +3,10 @@
 Source: https://fal.ai/models/openai/gpt-image-2/examples
 """
 
+import fal_client
 from dotenv import load_dotenv
 
-from gpt_image_2 import GPTImage2
-from gpt_image_2.download import save_result
+from _common import on_queue_update, save_images
 
 PROMPT = (
     "Broadcast news still captured mid-broadcast: a single professional news anchor "
@@ -31,14 +31,17 @@ PROMPT = (
 
 def main() -> None:
     load_dotenv()
-    client = GPTImage2()
-    result = client.generate(
-        PROMPT,
-        image_size={"width": 3500, "height": 2500},
-        quality="high",
+    result = fal_client.subscribe(
+        "openai/gpt-image-2",
+        arguments={
+            "prompt": PROMPT,
+            "image_size": {"width": 3500, "height": 2500},
+            "quality": "high",
+        },
         with_logs=True,
+        on_queue_update=on_queue_update,
     )
-    for path in save_result(result, prefix="news-anchor"):
+    for path in save_images(result, prefix="news-anchor"):
         print(f"Saved: {path}")
 
 

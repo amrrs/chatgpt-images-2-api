@@ -31,22 +31,37 @@
 | `output_format` | `jpeg` \| `png` \| `webp` | `png` | |
 | `sync_mode` | boolean | `false` | |
 
-## Python (using the `gpt-image-2` wrapper)
+## Python (`fal-client`)
 
 ```python
-from gpt_image_2 import GPTImage2
+import fal_client
 
-client = GPTImage2()
+result = fal_client.subscribe(
+    "openai/gpt-image-2/edit",
+    arguments={
+        "prompt": (
+            "Wrap the double-decker bus with this branding as a full livery. "
+            "Keep the street scene and people unchanged."
+        ),
+        "image_urls": [
+            "https://example.com/bus.png",
+            "https://example.com/livery.png",
+        ],
+        "image_size": "auto",
+        "quality": "high",
+    },
+    with_logs=True,
+)
+print(result["images"][0]["url"])
+```
 
-result = client.edit(
-    "Wrap the double-decker bus with this branding as a full livery. "
-    "Keep the street scene and people unchanged.",
-    image_urls=[
-        "https://example.com/bus.png",
-        "https://example.com/livery.png",
-    ],
-    image_size="auto",
-    quality="high",
+### Optional: the `gpt-image-2` wrapper
+
+```python
+import gpt_image_2
+result = gpt_image_2.edit(
+    "make it night-time, neon reflections",
+    image_urls=["https://example.com/scene.png"],
 )
 print(result.first_url)
 ```

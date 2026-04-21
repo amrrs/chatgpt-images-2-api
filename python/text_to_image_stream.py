@@ -1,7 +1,6 @@
 """Streaming text-to-image example for GPT Image 2 (gpt-image-2) via fal.ai.
 
-Streams live events from the fal.ai queue. Useful when you want progress
-updates or partial payloads as they arrive.
+Streams live events from the fal.ai queue using the official `fal-client` SDK.
 
 Usage
 -----
@@ -12,11 +11,11 @@ Usage
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 
+import fal_client
 from dotenv import load_dotenv
-
-from gpt_image_2 import GPTImage2
 
 
 def main() -> int:
@@ -27,8 +26,18 @@ def main() -> int:
     p.add_argument("--quality", default="high", choices=["low", "medium", "high"])
     args = p.parse_args()
 
-    client = GPTImage2()
-    for event in client.stream(args.prompt, image_size=args.size, quality=args.quality):
+    if not os.environ.get("FAL_KEY"):
+        print("FAL_KEY not set. Get one at https://fal.ai/dashboard/keys", file=sys.stderr)
+        return 1
+
+    for event in fal_client.stream(
+        "openai/gpt-image-2",
+        arguments={
+            "prompt": args.prompt,
+            "image_size": args.size,
+            "quality": args.quality,
+        },
+    ):
         print(event)
     return 0
 

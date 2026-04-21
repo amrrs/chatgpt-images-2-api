@@ -49,25 +49,43 @@ Preset sizes: `square_hd`, `square`, `portrait_4_3`, `portrait_16_9`, `landscape
 }
 ```
 
-## Python (using the `gpt-image-2` wrapper)
+## Python (`fal-client`)
 
-```python
-from gpt_image_2 import GPTImage2
-
-client = GPTImage2()  # reads FAL_KEY from env
-
-result = client.generate(
-    "a cinematic product shot of a red sneaker on wet asphalt, 4k",
-    image_size="landscape_16_9",
-    quality="high",
-    num_images=1,
-    output_format="png",
-)
-
-print(result.first_url)
+```bash
+pip install fal-client
+export FAL_KEY=...   # https://fal.ai/dashboard/keys
 ```
 
-One-liner:
+```python
+import fal_client
+
+def on_queue_update(update):
+    if update.status == "IN_PROGRESS":
+        for log in update.logs or []:
+            print(log["message"])
+
+result = fal_client.subscribe(
+    "openai/gpt-image-2",
+    arguments={
+        "prompt": "a cinematic product shot of a red sneaker on wet asphalt, 4k",
+        "image_size": "landscape_16_9",
+        "quality": "high",
+        "num_images": 1,
+        "output_format": "png",
+    },
+    with_logs=True,
+    on_queue_update=on_queue_update,
+)
+print(result["images"][0]["url"])
+```
+
+### Optional: the `gpt-image-2` wrapper
+
+If you'd rather use the tiny typed wrapper shipped in this repo:
+
+```bash
+pip install gpt-image-2
+```
 
 ```python
 import gpt_image_2
@@ -78,23 +96,6 @@ CLI:
 
 ```bash
 gpt-image-2 generate "a cute corgi astronaut" --size landscape_16_9 --quality high
-```
-
-## Python (raw fal-client)
-
-```python
-import fal_client
-
-result = fal_client.subscribe(
-    "openai/gpt-image-2",
-    arguments={
-        "prompt": "a cinematic product shot of a red sneaker on wet asphalt",
-        "image_size": "landscape_16_9",
-        "quality": "high",
-    },
-    with_logs=True,
-)
-print(result["images"][0]["url"])
 ```
 
 ## Node.js (`@fal-ai/client`)

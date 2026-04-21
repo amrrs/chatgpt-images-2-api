@@ -2,10 +2,10 @@
 Source: https://fal.ai/models/openai/gpt-image-2/edit/examples
 """
 
+import fal_client
 from dotenv import load_dotenv
 
-from gpt_image_2 import GPTImage2
-from gpt_image_2.download import save_result
+from _common import on_queue_update, save_images
 
 PROMPT = (
     "Transform this into a vinyl album cover. Add a bold album title \"DISTANCES\" in a "
@@ -23,15 +23,18 @@ INPUT_URL = "https://v3b.fal.media/files/b/0a8691af/9Se_1_VX1wzTjjTOpWbs9_bb39c2
 
 def main() -> None:
     load_dotenv()
-    client = GPTImage2()
-    result = client.edit(
-        PROMPT,
-        [INPUT_URL],
-        image_size={"width": 3000, "height": 2000},
-        quality="high",
+    result = fal_client.subscribe(
+        "openai/gpt-image-2/edit",
+        arguments={
+            "prompt": PROMPT,
+            "image_urls": [INPUT_URL],
+            "image_size": {"width": 3000, "height": 2000},
+            "quality": "high",
+        },
         with_logs=True,
+        on_queue_update=on_queue_update,
     )
-    for path in save_result(result, prefix="vinyl-album-edit"):
+    for path in save_images(result, prefix="vinyl-album-edit"):
         print(f"Saved: {path}")
 
 

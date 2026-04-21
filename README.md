@@ -1,13 +1,13 @@
 # GPT Image 2 (gpt-image-2) — Python Wrapper & Node.js Examples
 
-> **The unofficial `gpt-image-2` Python wrapper + Node.js examples for OpenAI's GPT Image 2.0 model, powered by [fal.ai](https://fal.ai/models/openai/gpt-image-2). Text-to-image and image editing in one line of code.**
+> **Drop-in Python (`fal-client`) and Node.js (`@fal-ai/client`) examples for OpenAI's GPT Image 2.0 model, powered by [fal.ai](https://fal.ai/models/openai/gpt-image-2). Text-to-image and image editing, plus an optional `gpt-image-2` Python wrapper and CLI.**
 
 [![fal.ai](https://img.shields.io/badge/Powered%20by-fal.ai-000)](https://fal.ai/models/openai/gpt-image-2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](#python-quickstart)
 [![Node 18+](https://img.shields.io/badge/Node-18%2B-339933?logo=node.js&logoColor=white)](#nodejs-quickstart)
 
-**What is this repo?** A tiny, friendly Python wrapper and a matching set of Node.js examples for calling **GPT Image 2** (`gpt-image-2`) — OpenAI's GPT Image 2.0 image model — through fal.ai's hosted API. It covers both endpoints: **text-to-image** (`openai/gpt-image-2`) and **image editing** (`openai/gpt-image-2/edit`).
+**What is this repo?** Copy-paste-ready **Python** and **Node.js** examples for calling **GPT Image 2** (`gpt-image-2`) — OpenAI's GPT Image 2.0 image model — through fal.ai's hosted API. It covers both endpoints: **text-to-image** (`openai/gpt-image-2`) and **image editing** (`openai/gpt-image-2/edit`). Every Python snippet below uses the official [`fal-client`](https://pypi.org/project/fal-client/) SDK directly, with zero extra abstractions — the kind of code you'd actually paste into your own project. This repo also ships an optional tiny wrapper (`pip install gpt-image-2`) and a `gpt-image-2` CLI for ergonomics.
 
 > ▶ **Try GPT Image 2 on the fal.ai playground:** [Text-to-image](https://fal.ai/models/openai/gpt-image-2) · [Edit / image-to-image](https://fal.ai/models/openai/gpt-image-2/edit) · [API docs](https://fal.ai/models/openai/gpt-image-2/api) · [Prompt examples](https://fal.ai/models/openai/gpt-image-2/examples)
 
@@ -31,13 +31,12 @@
 
 ## Features
 
-- One-line `gpt_image_2.generate("...")` and `gpt_image_2.edit("...", url)` helpers.
-- Typed `GPTImage2` client wrapping the fal.ai [`openai/gpt-image-2`](https://fal.ai/models/openai/gpt-image-2) endpoints.
-- Supports text-to-image **and** image editing (masks supported).
-- Resolutions up to **4K**, strong typography, commercial-use friendly.
+- **Drop-in Python examples** using `fal-client` directly — paste straight into your project.
+- Matching **Node.js** examples using `@fal-ai/client`.
+- Covers text-to-image **and** image editing (with optional mask).
 - Streaming (`stream`), queue (`submit` / `status` / `result`), and webhook support.
-- Installable CLI: `gpt-image-2 generate "a cute corgi astronaut"`.
-- Matching **Node.js** (`@fal-ai/client`) examples in [`node/`](./node).
+- Resolutions up to **3840 px edge** (~4K), strong typography, commercial-use friendly.
+- Optional tiny wrapper: `pip install gpt-image-2` for a one-liner API and a `gpt-image-2` CLI.
 - MIT licensed.
 
 ## Why gpt-image-2 (via fal.ai)?
@@ -52,9 +51,7 @@
 ### 1. Install
 
 ```bash
-pip install -e .          # from this repo (installs the gpt-image-2 wrapper)
-# or, once published:
-# pip install gpt-image-2
+pip install fal-client
 ```
 
 ### 2. Set your fal.ai API key
@@ -66,42 +63,72 @@ export FAL_KEY="your-fal-api-key"    # get one at https://fal.ai/dashboard/keys
 ### 3. Generate an image
 
 ```python
-from gpt_image_2 import GPTImage2
+import fal_client
 
-client = GPTImage2()
-result = client.generate("a cinematic product shot of a red sneaker on wet asphalt, 4k")
-print(result.first_url)
-```
+def on_queue_update(update):
+    if update.status == "IN_PROGRESS":
+        for log in update.logs or []:
+            print(log["message"])
 
-Or the one-liner:
-
-```python
-import gpt_image_2
-print(gpt_image_2.generate("a cute corgi astronaut, 4k").first_url)
-```
-
-Edit an image:
-
-```python
-import gpt_image_2
-
-result = gpt_image_2.edit(
-    "Wrap the bus with this branding as a full livery. Keep everything else unchanged.",
-    image_urls=[
-        "https://example.com/bus.png",
-        "https://example.com/livery.png",
-    ],
+result = fal_client.subscribe(
+    "openai/gpt-image-2",
+    arguments={
+        "prompt": "a cinematic product shot of a red sneaker on wet asphalt, 4k",
+        "image_size": "landscape_16_9",
+        "quality": "high",
+    },
+    with_logs=True,
+    on_queue_update=on_queue_update,
 )
-print(result.first_url)
+print(result["images"][0]["url"])
 ```
 
-Also see the example scripts in [`python/`](./python):
+### 4. Edit an image
+
+```python
+import fal_client
+
+result = fal_client.subscribe(
+    "openai/gpt-image-2/edit",
+    arguments={
+        "prompt": "Wrap the bus with this branding as a full livery. Keep everything else unchanged.",
+        "image_urls": [
+            "https://example.com/bus.png",
+            "https://example.com/livery.png",
+        ],
+        "image_size": "auto",
+        "quality": "high",
+    },
+    with_logs=True,
+)
+print(result["images"][0]["url"])
+```
+
+Also see the ready-to-run scripts in [`python/`](./python):
 
 - [`python/text_to_image.py`](./python/text_to_image.py)
 - [`python/edit_image.py`](./python/edit_image.py)
 - [`python/text_to_image_stream.py`](./python/text_to_image_stream.py)
 - [`python/queue_submit.py`](./python/queue_submit.py)
 - [`python/examples/`](./python/examples) — runnable versions of every prompt in the [prompts gallery](./docs/prompts-gallery.md).
+
+### Optional: `gpt-image-2` wrapper + CLI
+
+For one-liners and a CLI, install the thin wrapper shipped in this repo:
+
+```bash
+pip install gpt-image-2                 # or:  pip install -e .  (from this repo)
+```
+
+```python
+import gpt_image_2
+print(gpt_image_2.generate("a cute corgi astronaut, 4k").first_url)
+```
+
+```bash
+gpt-image-2 generate "a cute corgi astronaut" --size landscape_16_9 --quality high
+gpt-image-2 edit "make it night-time" --image https://example.com/scene.png
+```
 
 ## Node.js quickstart
 
@@ -178,17 +205,25 @@ Full docs: [docs/edit-image.md](./docs/edit-image.md).
 ## Streaming and queue
 
 ```python
-# Python streaming
-from gpt_image_2 import GPTImage2
-for event in GPTImage2().stream("a surreal oil painting of Mars at sunrise"):
+# Python streaming with fal-client
+import fal_client
+for event in fal_client.stream(
+    "openai/gpt-image-2",
+    arguments={"prompt": "a surreal oil painting of Mars at sunrise"},
+):
     print(event)
 ```
 
 ```python
-# Python queue + webhook
-client = GPTImage2()
-rid = client.submit("…", webhook_url="https://your.app/api/fal/webhook")
-result = client.result(rid)
+# Python queue + webhook with fal-client
+import fal_client
+
+handle = fal_client.submit(
+    "openai/gpt-image-2",
+    arguments={"prompt": "a cinematic sunset over the Himalayas, 4k"},
+    webhook_url="https://your.app/api/fal/webhook",
+)
+result = fal_client.result("openai/gpt-image-2", request_id=handle.request_id)
 ```
 
 ```js
@@ -227,23 +262,25 @@ Runnable, copy-paste prompts lifted from fal.ai's [text-to-image](https://fal.ai
 
 More: [docs/prompts-gallery.md](./docs/prompts-gallery.md).
 
-## CLI
+## CLI (optional wrapper)
 
-After `pip install -e .` you get a `gpt-image-2` command:
+The optional `gpt-image-2` wrapper ships a CLI:
 
 ```bash
+pip install gpt-image-2
 gpt-image-2 generate "a cinematic product shot of a red sneaker" --size landscape_16_9 --quality high
 gpt-image-2 generate "poster art" --size 1280x720 -n 2 --format webp
 gpt-image-2 edit "make it night-time, neon reflections" --image https://example.com/in.png
 ```
 
-Run `gpt-image-2 --help` for full flags.
+Run `gpt-image-2 --help` for full flags. Prefer raw `fal-client`? Every example in this repo's [`python/`](./python) folder is written that way.
 
 ## FAQ
 
 See [docs/faq.md](./docs/faq.md). A few highlights:
 
 - **What is gpt-image-2?** OpenAI's next-gen image model, focused on high-res output, strong typography, and fine-grained editing. Hosted on fal.ai as `openai/gpt-image-2` and `openai/gpt-image-2/edit`.
+- **Do I need the wrapper?** No. Every example in this repo uses `fal-client` directly. The `gpt-image-2` pip package is just optional sugar + a CLI.
 - **Max resolution?** 3840 px max edge, up to ~8.3 MP total, aspect ≤ 3:1.
 - **Does it support editing?** Yes — the [`/edit`](https://fal.ai/models/openai/gpt-image-2/edit) endpoint accepts one or more reference images and an optional mask.
 - **Is there streaming?** Yes — both endpoints support streaming and a queue/webhook flow.

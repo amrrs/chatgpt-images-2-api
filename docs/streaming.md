@@ -8,13 +8,23 @@ Two ways to run **gpt-image-2** asynchronously on fal.ai.
 
 Use streaming when you want live progress events delivered to your process.
 
-### Python
+### Python (`fal-client`)
 
 ```python
-from gpt_image_2 import GPTImage2
+import fal_client
 
-client = GPTImage2()
-for event in client.stream("a surreal oil painting of Mars at sunrise"):
+for event in fal_client.stream(
+    "openai/gpt-image-2",
+    arguments={"prompt": "a surreal oil painting of Mars at sunrise"},
+):
+    print(event)
+```
+
+Or with the optional wrapper:
+
+```python
+import gpt_image_2
+for event in gpt_image_2.stream("a surreal oil painting of Mars at sunrise"):
     print(event)
 ```
 
@@ -40,26 +50,29 @@ const result = await stream.done();
 
 Use the queue for long-running jobs or when you want a webhook to notify you.
 
-### Python
+### Python (`fal-client`)
 
 ```python
-from gpt_image_2 import GPTImage2
 import time
+import fal_client
 
-client = GPTImage2()
-request_id = client.submit(
-    "a cinematic sunset over the Himalayas, 4k",
+APP_ID = "openai/gpt-image-2"
+
+handle = fal_client.submit(
+    APP_ID,
+    arguments={"prompt": "a cinematic sunset over the Himalayas, 4k"},
     webhook_url="https://your.app/api/fal/webhook",
 )
+request_id = handle.request_id
 
 while True:
-    s = client.status(request_id)
-    if str(s.get("status")).upper() in {"COMPLETED", "FAILED"}:
+    status = fal_client.status(APP_ID, request_id=request_id, with_logs=True)
+    if type(status).__name__ in {"Completed", "CompletedWithErrors", "Failed"}:
         break
     time.sleep(2)
 
-result = client.result(request_id)
-print(result.first_url)
+result = fal_client.result(APP_ID, request_id=request_id)
+print(result["images"][0]["url"])
 ```
 
 ### Node.js

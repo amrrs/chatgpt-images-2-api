@@ -10,7 +10,7 @@ GPT Image 2 (model id `gpt-image-2`) is OpenAI's next-generation image generatio
 
 ### Is there an official "gpt-image-2" Python SDK?
 
-There isn't an OpenAI-branded package. This repo ships a tiny **Python wrapper** called `gpt-image-2` (import as `gpt_image_2`) that wraps fal-client and gives you `generate()`, `edit()`, `stream()`, and a `gpt-image-2` CLI. If you prefer to call fal.ai directly, use [`fal-client`](https://pypi.org/project/fal-client/) on Python or [`@fal-ai/client`](https://www.npmjs.com/package/@fal-ai/client) on Node.
+There isn't an OpenAI-branded package. The officially supported path is to call the fal.ai endpoint using the [`fal-client`](https://pypi.org/project/fal-client/) Python SDK (or [`@fal-ai/client`](https://www.npmjs.com/package/@fal-ai/client) on Node) — every example in this repo shows exactly that. As optional sugar, this repo also ships a tiny **Python wrapper** called `gpt-image-2` (import as `gpt_image_2`) that adds `generate()` / `edit()` / `stream()` one-liners and a `gpt-image-2` CLI. Use whichever you prefer.
 
 ### How do I get an API key?
 
