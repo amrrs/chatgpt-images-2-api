@@ -1,0 +1,37 @@
+{
+  "name": "gpt-image-2-examples",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Node.js examples for GPT Image 2 (gpt-image-2) — OpenAI's GPT Image 2.0 via fal.ai. Text-to-image + image editing.",
+  "keywords": [
+    "gpt-image-2",
+    "gpt image 2",
+    "openai",
+    "fal",
+    "fal-ai",
+    "image-generation",
+    "text-to-image",
+    "image-editing"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "generate": "node text-to-image.js",
+    "edit": "node edit-image.js",
+    "stream": "node text-to-image-stream.js",
+    "queue": "node queue-submit.js",
+    "example:hero": "node examples/hero-infographic.js",
+    "example:boardroom": "node examples/boardroom.js",
+    "example:anchor": "node examples/news-anchor.js",
+    "example:studio": "node examples/studio-wall.js",
+    "example:vinyl": "node examples/vinyl-album-edit.js",
+    "example:bus": "node examples/bus-livery-edit.js"
+  },
+  "dependencies": {
+    "@fal-ai/client": "^1.2.0",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

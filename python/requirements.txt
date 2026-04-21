@@ -1,0 +1,7 @@
+# Runtime dependencies for the GPT Image 2 (gpt-image-2) Python examples.
+# Install the local wrapper in editable mode from the repo root:
+#   pip install -e .
+# or install just the dependencies:
+fal-client>=0.5.0
+requests>=2.31
+python-dotenv>=1.0

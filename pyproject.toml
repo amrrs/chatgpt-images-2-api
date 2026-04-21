@@ -1,0 +1,67 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "gpt-image-2"
+version = "0.1.0"
+description = "Python wrapper / SDK for GPT Image 2 (gpt-image-2) — OpenAI's GPT Image 2.0 model via fal.ai. Text-to-image and image editing in one line of code."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "gpt-image-2 contributors" }]
+keywords = [
+    "gpt-image-2",
+    "gpt image 2",
+    "gpt-image-2.0",
+    "openai",
+    "fal",
+    "fal-ai",
+    "image generation",
+    "text-to-image",
+    "image-editing",
+    "ai",
+    "sdk",
+    "wrapper",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "fal-client>=0.5.0",
+    "requests>=2.31",
+]
+
+[project.optional-dependencies]
+dev = [
+    "python-dotenv>=1.0",
+    "ruff>=0.5",
+]
+
+[project.urls]
+Homepage = "https://github.com/your-org/gpt-image-2-api"
+Documentation = "https://github.com/your-org/gpt-image-2-api#readme"
+Repository = "https://github.com/your-org/gpt-image-2-api"
+Issues = "https://github.com/your-org/gpt-image-2-api/issues"
+"fal.ai Playground" = "https://fal.ai/models/openai/gpt-image-2"
+"fal.ai Edit Playground" = "https://fal.ai/models/openai/gpt-image-2/edit"
+
+[project.scripts]
+gpt-image-2 = "gpt_image_2.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["gpt_image_2"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
