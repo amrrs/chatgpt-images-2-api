@@ -1,6 +1,8 @@
-# GPT Image 2 Text-to-Image API
+# GPT Image 2 Text-to-Image API (a.k.a. ChatGPT Image 2 API)
 
-> How to generate images with **GPT Image 2** (`gpt-image-2`) — OpenAI's GPT Image 2.0 model — using the fal.ai hosted endpoint, in **Python** and **Node.js**.
+> How to generate images with **GPT Image 2** (`gpt-image-2`) — OpenAI's GPT Image 2.0 model, the same model behind **ChatGPT's image generator** — using the fal.ai hosted endpoint, in **Python** and **Node.js**.
+>
+> Also known as: ChatGPT Image 2, ChatGPT Images 2.0, ChatGPT image generator API, OpenAI gpt-image-2 API.
 
 - fal.ai model: <https://fal.ai/models/openai/gpt-image-2>
 - fal.ai API docs: <https://fal.ai/models/openai/gpt-image-2/api>

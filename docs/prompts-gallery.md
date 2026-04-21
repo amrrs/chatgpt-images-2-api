@@ -1,6 +1,6 @@
-# GPT Image 2 Prompts Gallery
+# GPT Image 2 Prompts Gallery (ChatGPT Image 2 Prompts)
 
-Curated, copy-paste-ready prompts for **GPT Image 2** (`gpt-image-2`), drawn from fal.ai's official example gallery. Each prompt is paired with a runnable Python and Node.js script in this repo.
+Curated, copy-paste-ready prompts for **GPT Image 2** (`gpt-image-2`) — the model behind ChatGPT's image generator — drawn from fal.ai's official example gallery. Each prompt is paired with a runnable Python and Node.js script in this repo.
 
 - Text-to-image playground: <https://fal.ai/models/openai/gpt-image-2>
 - Edit playground: <https://fal.ai/models/openai/gpt-image-2/edit>

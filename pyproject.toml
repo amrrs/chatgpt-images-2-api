@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "gpt-image-2"
 version = "0.1.0"
-description = "Python wrapper / SDK for GPT Image 2 (gpt-image-2) — OpenAI's GPT Image 2.0 model via fal.ai. Text-to-image and image editing in one line of code."
+description = "Python wrapper / SDK for GPT Image 2 (gpt-image-2) — OpenAI's GPT Image 2.0 model, aka the ChatGPT image generator, via fal.ai. Text-to-image and image editing in one line of code."
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT" }
@@ -14,10 +14,19 @@ keywords = [
     "gpt-image-2",
     "gpt image 2",
     "gpt-image-2.0",
+    "gpt image 2.0",
+    "chatgpt image 2",
+    "chatgpt images 2",
+    "chatgpt image 2.0",
+    "chatgpt image generator",
+    "chatgpt image api",
+    "chatgpt images api",
     "openai",
+    "openai-images",
     "fal",
     "fal-ai",
     "image generation",
+    "image-generation-api",
     "text-to-image",
     "image-editing",
     "ai",

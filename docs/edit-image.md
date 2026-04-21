@@ -1,6 +1,8 @@
-# GPT Image 2 Edit API (Image-to-Image)
+# GPT Image 2 Edit API (a.k.a. ChatGPT Image 2 Edit)
 
-> How to edit images with **GPT Image 2** (`gpt-image-2/edit`) — OpenAI's GPT Image 2.0 edit endpoint — using fal.ai, in Python and Node.js.
+> How to edit images with **GPT Image 2** (`gpt-image-2/edit`) — OpenAI's GPT Image 2.0 edit endpoint, the same model ChatGPT uses for in-app image edits — via fal.ai, in Python and Node.js.
+>
+> Also known as: ChatGPT Image 2 edit API, ChatGPT Images 2.0 edit, OpenAI gpt-image-2 edit API.
 
 - fal.ai model: <https://fal.ai/models/openai/gpt-image-2/edit>
 - fal.ai API docs: <https://fal.ai/models/openai/gpt-image-2/edit/api>

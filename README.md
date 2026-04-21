@@ -1,13 +1,17 @@
-# GPT Image 2 (gpt-image-2) — Python Wrapper & Node.js Examples
+# GPT Image 2 (gpt-image-2) — Python & Node.js API Examples
 
-> **Drop-in Python (`fal-client`) and Node.js (`@fal-ai/client`) examples for OpenAI's GPT Image 2.0 model, powered by [fal.ai](https://fal.ai/models/openai/gpt-image-2). Text-to-image and image editing, plus an optional `gpt-image-2` Python wrapper and CLI.**
+> **Drop-in Python (`fal-client`) and Node.js (`@fal-ai/client`) examples for OpenAI's GPT Image 2.0 model — the image generation model behind ChatGPT's image features — powered by [fal.ai](https://fal.ai/models/openai/gpt-image-2). Text-to-image and image editing, plus an optional `gpt-image-2` Python wrapper and CLI.**
+
+<sub>Also known as: **ChatGPT Image 2**, **ChatGPT Images 2.0**, **GPT Image 2.0 API**, **OpenAI gpt-image-2 API**, **ChatGPT image generator API**.</sub>
 
 [![fal.ai](https://img.shields.io/badge/Powered%20by-fal.ai-000)](https://fal.ai/models/openai/gpt-image-2)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-3776AB?logo=python&logoColor=white)](#python-quickstart)
 [![Node 18+](https://img.shields.io/badge/Node-18%2B-339933?logo=node.js&logoColor=white)](#nodejs-quickstart)
 
-**What is this repo?** Copy-paste-ready **Python** and **Node.js** examples for calling **GPT Image 2** (`gpt-image-2`) — OpenAI's GPT Image 2.0 image model — through fal.ai's hosted API. It covers both endpoints: **text-to-image** (`openai/gpt-image-2`) and **image editing** (`openai/gpt-image-2/edit`). Every Python snippet below uses the official [`fal-client`](https://pypi.org/project/fal-client/) SDK directly, with zero extra abstractions — the kind of code you'd actually paste into your own project. This repo also ships an optional tiny wrapper (`pip install gpt-image-2`) and a `gpt-image-2` CLI for ergonomics.
+**What is this repo?** Copy-paste-ready **Python** and **Node.js** examples for calling **GPT Image 2** (`gpt-image-2`) — OpenAI's GPT Image 2.0 image model, the same model that powers **ChatGPT's image generation** — through fal.ai's hosted API. It covers both endpoints: **text-to-image** (`openai/gpt-image-2`) and **image editing** (`openai/gpt-image-2/edit`). Every Python snippet below uses the official [`fal-client`](https://pypi.org/project/fal-client/) SDK directly, with zero extra abstractions — the kind of code you'd actually paste into your own project. This repo also ships an optional tiny wrapper (`pip install gpt-image-2`) and a `gpt-image-2` CLI for ergonomics.
+
+> **Searching for "ChatGPT Image 2 API" or "ChatGPT Images 2.0"?** You're in the right place. ChatGPT's in-product image generator is powered by OpenAI's `gpt-image-2` model — the same model this repo calls through fal.ai. See the [ChatGPT vs gpt-image-2 FAQ](./docs/faq.md#is-gpt-image-2-the-same-as-the-chatgpt-image-generator) for the full clarification.
 
 > ▶ **Try GPT Image 2 on the fal.ai playground:** [Text-to-image](https://fal.ai/models/openai/gpt-image-2) · [Edit / image-to-image](https://fal.ai/models/openai/gpt-image-2/edit) · [API docs](https://fal.ai/models/openai/gpt-image-2/api) · [Prompt examples](https://fal.ai/models/openai/gpt-image-2/examples)
 
@@ -280,6 +284,7 @@ Run `gpt-image-2 --help` for full flags. Prefer raw `fal-client`? Every example 
 See [docs/faq.md](./docs/faq.md). A few highlights:
 
 - **What is gpt-image-2?** OpenAI's next-gen image model, focused on high-res output, strong typography, and fine-grained editing. Hosted on fal.ai as `openai/gpt-image-2` and `openai/gpt-image-2/edit`.
+- **Is gpt-image-2 the same as the ChatGPT image generator?** ChatGPT's in-product image generation is powered *by* `gpt-image-2` — the model this repo calls directly. So "ChatGPT Image 2 API", "ChatGPT Images 2.0 API", and "gpt-image-2 API" are all the same underlying model. ChatGPT is the product; `gpt-image-2` is the model id.
 - **Do I need the wrapper?** No. Every example in this repo uses `fal-client` directly. The `gpt-image-2` pip package is just optional sugar + a CLI.
 - **Max resolution?** 3840 px max edge, up to ~8.3 MP total, aspect ≤ 3:1.
 - **Does it support editing?** Yes — the [`/edit`](https://fal.ai/models/openai/gpt-image-2/edit) endpoint accepts one or more reference images and an optional mask.
