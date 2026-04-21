@@ -17,7 +17,7 @@ The wrapper targets the `openai/gpt-image-2` and `openai/gpt-image-2/edit`
 endpoints hosted on fal.ai. Set the ``FAL_KEY`` environment variable, or pass
 ``api_key=`` to :class:`GPTImage2`.
 
-Docs: https://github.com/your-org/gpt-image-2-api
+Docs: https://github.com/amrrs/chatgpt-images-2-api
 fal.ai: https://fal.ai/models/openai/gpt-image-2
 """
 

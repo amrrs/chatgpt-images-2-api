@@ -300,6 +300,18 @@ See [docs/faq.md](./docs/faq.md). A few highlights:
 - **Prompt examples (text-to-image):** <https://fal.ai/models/openai/gpt-image-2/examples>
 - **Prompt examples (edit):** <https://fal.ai/models/openai/gpt-image-2/edit/examples>
 
+## Repository topics
+
+This repo uses the following GitHub topics so GitHub search and Google can find it. The full list lives in [`.github/topics.txt`](./.github/topics.txt); apply them after pushing to GitHub with:
+
+```bash
+bash scripts/apply-github-topics.sh                # uses current `origin`
+# or explicitly:
+bash scripts/apply-github-topics.sh amrrs/chatgpt-images-2-api
+```
+
+<sub>`gpt-image-2` · `gpt-image-2-api` · `chatgpt-image-2` · `chatgpt-images-2` · `chatgpt-image-generator` · `openai` · `openai-api` · `fal-ai` · `image-generation` · `image-generation-api` · `text-to-image` · `image-editing` · `image-to-image` · `ai-image-generation` · `generative-ai` · `api-wrapper` · `python` · `nodejs` · `sdk` · `image-api`</sub>
+
 ## Contributing
 
 PRs are welcome — especially new prompt examples. Add a script under `python/examples/` and `node/examples/`, then extend [docs/prompts-gallery.md](./docs/prompts-gallery.md).

@@ -1,0 +1,35 @@
+name: Apply GitHub Topics
+
+# Keeps the repo's GitHub topics (tags) in sync with `.github/topics.txt`.
+# Runs automatically whenever the topics file or the apply script changes on
+# `main`, and can also be triggered manually from the Actions tab.
+#
+# Note: updating repository topics requires elevated permissions. The default
+# GITHUB_TOKEN with `administration: write` below is usually enough for repos
+# owned by a user; for some organization setups you may need to provide a PAT
+# in `secrets.TOPICS_TOKEN` instead (falls back to GITHUB_TOKEN otherwise).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/topics.txt"
+      - "scripts/apply-github-topics.sh"
+      - ".github/workflows/apply-topics.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  administration: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply repository topics
+        env:
+          GH_TOKEN: ${{ secrets.TOPICS_TOKEN || secrets.GITHUB_TOKEN }}
+        run: bash scripts/apply-github-topics.sh "${{ github.repository }}"

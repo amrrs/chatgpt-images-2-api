@@ -35,16 +35,34 @@ keywords = [
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Environment :: Web Environment",
     "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
     "Operating System :: OS Independent",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Internet :: WWW/HTTP",
     "Topic :: Multimedia :: Graphics",
+    "Topic :: Multimedia :: Graphics :: Graphics Conversion",
     "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+    "Typing :: Typed",
 ]
 dependencies = [
     "fal-client>=0.5.0",
@@ -58,10 +76,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/your-org/gpt-image-2-api"
-Documentation = "https://github.com/your-org/gpt-image-2-api#readme"
-Repository = "https://github.com/your-org/gpt-image-2-api"
-Issues = "https://github.com/your-org/gpt-image-2-api/issues"
+Homepage = "https://github.com/amrrs/chatgpt-images-2-api"
+Documentation = "https://github.com/amrrs/chatgpt-images-2-api#readme"
+Repository = "https://github.com/amrrs/chatgpt-images-2-api"
+Issues = "https://github.com/amrrs/chatgpt-images-2-api/issues"
 "fal.ai Playground" = "https://fal.ai/models/openai/gpt-image-2"
 "fal.ai Edit Playground" = "https://fal.ai/models/openai/gpt-image-2/edit"
 
@@ -70,6 +88,9 @@ gpt-image-2 = "gpt_image_2.cli:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["gpt_image_2"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"gpt_image_2/py.typed" = "gpt_image_2/py.typed"
 
 [tool.ruff]
 line-length = 100

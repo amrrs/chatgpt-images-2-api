@@ -1,0 +1,25 @@
+# GitHub repository topics for this repo.
+# Lowercase, hyphen-separated, <= 35 chars each, max 20 total.
+# Apply with:   bash scripts/apply-github-topics.sh
+#
+# Ranked roughly by search value / specificity.
+gpt-image-2
+gpt-image-2-api
+chatgpt-image-2
+chatgpt-images-2
+chatgpt-image-generator
+openai
+openai-api
+fal-ai
+image-generation
+image-generation-api
+text-to-image
+image-editing
+image-to-image
+ai-image-generation
+generative-ai
+api-wrapper
+python
+nodejs
+sdk
+image-api
